@@ -3,7 +3,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-let SECRET = 'myserverhasfleas';
+let SECRET = '';
 
 let db = {};
 

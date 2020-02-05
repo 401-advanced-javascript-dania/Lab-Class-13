@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static('./public'))
 let users = {};
-let SECRET = 'myserverhasfleas';
+let SECRET = '';
 
 // echo '{"username":"john","password":"foo"}' | http post :3000/signup
 app.post('/signup', async (req, res) => {
