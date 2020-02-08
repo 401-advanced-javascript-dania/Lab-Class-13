@@ -32,6 +32,21 @@ return Promise.reject();
 let unique = jwt.sign({username:user.username},SECRET);
 return unique;
  }
+ // function to bearer to check the token using jwt and it need time so we use async funtion
+ // it is a function that will return the all of data user
+ users.tokenAthenticate= async function(token){
+try{
+    let tokenToAthenticate =  jwt.verify(token, SECRET);
+    if (db[tokenToAthenticate.username]){
+        // to return token when we use then block 
+      return  Promise.resolve(tokenToAthenticate);
+    }else{
+       return Promise.reject();
+    }
+}catch(err){
+    return Promise.reject();
+}
+ }
  // it is a function that will return the all of data user
  users.dataUser=()=>db;
  module.exports=users;

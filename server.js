@@ -2,7 +2,8 @@
 const express = require('express');
 const basicOfAuth=require('./basic-auth-middleware.js');
 const users = require('./users.js');
-const oauthMiddleware = require('./oauth-middleware.js')
+const oauthMiddleware = require('./oauth-middleware.js');
+const bearerOauthMiddleware = require('./bearer-auth-middleware.js')
 const app =express();
 //global middleware 
 app.use(express.json());
@@ -29,8 +30,13 @@ res.status(200).send(req.token)
 app.get('/users',basicOfAuth,(req,res)=>{
     res.status(200).json(users.list())
 })
-//
+// in oauth it will check the username and password and generate the token 
 app.get('/oauth',oauthMiddleware,(req,res)=>{
 res.status(200).send(req.token)
 })
+// in bearer it will verfiy the token 
+app.get('/user',bearerOauthMiddleware,(req,res)=>{
+    res.status(200).json(req.user)
+})
+
 app.listen(3000,()=> console.log('server up ',3000))
