@@ -1,8 +1,6 @@
-
-
 'use strict';
 const base64 = require('base-64');
-const users = require('./index.js');
+const users = require('./users.js');
 //middle-ware function 
 let basicAuthMiddleware=function (req,res,next) {
     //req.headers.authorization is hashed password and username
