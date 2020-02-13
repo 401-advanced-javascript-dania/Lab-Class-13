@@ -4,7 +4,7 @@
 const express = require('express');
 const basicOfAuth = require('./basic-auth-middleware.js');
 const oauthMiddleware = require('./oauth-middleware.js');
-const bearerMiddleware = require('./bearer-auth-middleware.js')
+const bearerMiddleware = require('./bearer-auth-middleware.js');
 const Users = require('./users.js');
 const app = express();
 //global middleware
@@ -33,18 +33,19 @@ app.post('/signin',basicOfAuth,(req,res)=>{
 });
 // it will reutrn the all database
 app.get('/users',basicOfAuth,(req,res)=>{
-    Users.data()
+  Users.data()
     .then(dataOfUser => {
-        res.status(200).json(dataOfUser);
-    })
+      res.status(200).json(dataOfUser);
+    });
 });
 
 app.get('/oauth',oauthMiddleware,(req,res,next)=>{
   res.status(200).json(req.token);
 });
 app.get('/user',bearerMiddleware,(req,res,next)=>{
-    res.status(200).json(req.user)
-})
+
+  res.status(200).json(req.user);
+});
 module.exports = {
   server:app,
   start: port =>{
